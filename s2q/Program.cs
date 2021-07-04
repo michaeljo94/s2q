@@ -1,26 +1,20 @@
-﻿namespace s2q
+﻿using System.Runtime.InteropServices;
+using s2q.Controller;
+using s2q.Model.Actions;
+using s2q.UI;
+
+namespace s2q
 {
     internal class Program
     {
-        private Program()
+        private Program(string[] args)
         {
-            SearchEngineImpl yt = new YoutubeSearchEngine();
-            SearchEngineImpl google = new GoogleSearchEngine();
-
-            var pcc = new PlayerCtlController();
-            var youtubeSC = new SearchController(pcc, yt);
-            var googleSC = new SearchController(pcc, google);
-
-            var youtubeBC = new BrowserController(youtubeSC.SearchUrl());
-            var googleBC = new BrowserController(googleSC.SearchUrl());
-
-            youtubeBC.Open();
-            googleBC.Open();
+            MainController mainController = new MainController(args);
         }
 
         private static void Main(string[] args)
         {
-            var p = new Program();
+            var p = new Program(args);
         }
     }
 }

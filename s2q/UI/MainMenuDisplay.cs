@@ -1,6 +1,6 @@
 namespace s2q.UI
 {
-    public class UserInputController
+    public class MainMenuDisplay
     {
         
     }
