@@ -1,20 +1,26 @@
-﻿using System;
-using System.Text;
-
-namespace s2q
+﻿namespace s2q
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private Program()
         {
+            SearchEngineImpl yt = new YoutubeSearchEngine();
+            SearchEngineImpl google = new GoogleSearchEngine();
+
             var pcc = new PlayerCtlController();
-            var sb = new StringBuilder();
-            sb.Append(pcc.GetArtist());
-            sb.Append('-');
-            sb.Append(pcc.GetAlbum());
-            sb.Append('-');
-            sb.Append(pcc.GetTitle());
-            Console.WriteLine(sb.ToString());
+            var youtubeSC = new SearchController(pcc, yt);
+            var googleSC = new SearchController(pcc, google);
+
+            var youtubeBC = new BrowserController(youtubeSC.SearchUrl());
+            var googleBC = new BrowserController(googleSC.SearchUrl());
+
+            youtubeBC.Open();
+            googleBC.Open();
+        }
+
+        private static void Main(string[] args)
+        {
+            var p = new Program();
         }
     }
 }
